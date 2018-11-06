@@ -1,0 +1,135 @@
+.logo{
+    height:auto; 
+    width:130px;
+}
+
+
+.col-pad_adjst{
+    padding:0;
+}
+.home_new_in .img_container,
+.collection_bg{
+    margin-top:50px;
+}
+
+.home_new_in .img_container{
+    overflow:hidden;
+}
+.home_new_in:hover .new_collection_img{
+    -moz-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15) ;
+
+    -webkit-transition: transform 2.5s ease-in-out;
+    -moz-transition:transform 2.5s ease-in-out;
+    -ms-transition:transform 2.5s ease-in-out;
+}
+
+.img_responsive{
+    width:100%;
+}
+.col_adjust{
+padding:0 !important;
+margin:0;
+}
+.container-fluid img{
+padding:0;
+margin:0;
+width:100%;
+}
+
+.h_cl_shop{
+    position:absolute;
+    top:90%;
+    left:50%;
+    transform: translateX(-50%);
+    color:white;
+}
+.h_cl_shop:hover{
+    text-decoration: none;
+    color:green;
+}
+
+
+.col-pad_adjst{
+    padding:0;
+}
+.home_new_in .img_container,
+.collection_bg{
+    margin-top:50px;
+}
+
+.home_sec .img_container{
+    margin-top:50px;
+}
+.home_sec{
+    margin-bottom:50px;
+}
+.explore_bg{
+    margin-bottom:50px;
+}
+.home_sec .img_container{
+    overflow:hidden;
+}
+.home_sec .img_container img:hover{
+    -moz-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15) ;
+
+    -webkit-transition: transform 2.5s ease-in-out;
+    -moz-transition:transform 2.5s ease-in-out;
+    -ms-transition:transform 2.5s ease-in-out;
+}
+
+.footer_bg{
+    border-top:1px solid rgb(199, 199, 199) !important;
+}
+
+.footer_lks{
+    width:70%;
+    margin:auto;
+    padding-bottom:20px;
+}
+.footer_lks .h5{
+    font-size:15px;
+}
+
+.f_links a{
+    font-size:12px;
+    color:rgb(34, 34, 34);
+}
+
+.subscribe_news{
+    text-align:center;
+    margin-bottom:50px;
+}
+.subscribe_news h6{
+    padding:50px;
+}
+
+.subscribe_form{
+    width:40%;
+    margin:auto;
+}
+.subscribe_form input[type=email]{
+    border:none;
+    border-bottom:1px solid rgb(34, 34, 34);
+    box-shadow: none;
+}
+.news_btn{
+    background-color:transparent;
+    color:rgb(34, 34, 34);
+    border:none;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
