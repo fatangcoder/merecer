@@ -12,7 +12,7 @@ include("functions/functions.php");
 
 <head>
 
-<title>Merecer Melhor | coming soon </title>
+<title>Merecer Melhor | coming soon in 2018 </title>
 <meta name="google-site-verification" content="cfEtbhLPxNxhejLF5MDgsRMIq-hapjeFth9hFCvLsN4" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet" >
