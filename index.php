@@ -1,12 +1,84 @@
 <?php
 
 session_start();
+include('customer/gpConfig.php');
+include('customer/User.php');
 
 include("includes/db.php");
 
 include("functions/functions.php");
 
 ?>
+
+<?php
+//Include GP config file && User class
+
+
+if(isset($_GET['code'])){
+
+
+    $gClient->authenticate($_GET['code']);
+    $_SESSION['token'] = $gClient->getAccessToken();
+    header('Location: ' . filter_var($redirectURL, FILTER_SANITIZE_URL));
+}
+
+if (isset($_SESSION['token'])) {
+    $gClient->setAccessToken($_SESSION['token']);
+}
+
+if ($gClient->getAccessToken()) {
+    //Get user profile data from google
+
+
+    $gpUserProfile = $google_oauthV2->userinfo->get();
+    
+    //Initialize User class
+    $user = new User();
+    
+    //Insert or update user data to the database
+    $gpUserData = array(
+        'oauth_provider'=> 'google',
+        'oauth_uid'     => $gpUserProfile['id'],
+        'first_name'    => $gpUserProfile['given_name'],
+        'last_name'     => $gpUserProfile['family_name'],
+        'email'         => $gpUserProfile['email'],
+        'gender'        => 'NA',
+        'locale'        => $gpUserProfile['locale'],
+        'picture'       => $gpUserProfile['picture'],
+        'link'          => $gpUserProfile['link']
+    );
+    $userData = $user->checkUser($gpUserData);
+    
+    //Storing user data into session
+    $_SESSION['userData'] = $userData;
+    
+    //Render facebook profile data
+    if(!empty($userData)){
+
+        $_SESSION['user_name'] = $userData['first_name'];
+        $_SESSION['customer_email'] = $userData['email'];
+        //header("Location: index.php");
+
+        // $output = '<h1>Google+ Profile Details </h1>';
+        // $output .= '<img src="'.$userData['picture'].'" width="300" height="220">';
+        // $output .= '<br/>Google ID : ' . $userData['oauth_uid'];
+        // $output .= '<br/>Name : ' . $userData['first_name'].' '.$userData['last_name'];
+        // $output .= '<br/>Email : ' . $userData['email'];
+        // $output .= '<br/>Gender : ' . $userData['gender'];
+        // $output .= '<br/>Locale : ' . $userData['locale'];
+        // $output .= '<br/>Logged in with : Google';
+        // $output .= '<br/><a href="'.$userData['link'].'" target="_blank">Click to Visit Google+ Page</a>';
+        // $output .= '<br/>Logout from <a href="logout.php">Google</a>'; 
+    }else{
+        $output = '<h3 style="color:red">Some problem occurred, please try again.</h3>';
+    }
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -40,17 +112,25 @@ include("functions/functions.php");
 <a href="#" class="btn btn-success btn-sm" >
 <?php
 
-if(!isset($_SESSION['customer_email'])){
+// if(!isset($_SESSION['customer_email'])){
+// echo "Welcome :Guest";
 
-echo "Welcome :Guest";
 
+// }else{
 
-}else{
+// echo "Welcome : " . $_SESSION['customer_email'] . "";
 
-echo "Welcome : " . $_SESSION['customer_email'] . "";
+// }
 
-}
-
+if(!isset($_SESSION['user_name'])){
+    echo "Welcome :Guest";
+    
+    
+    }else{
+    
+    echo "Welcome : " . $_SESSION['user_name'] . "";
+    
+    }
 
 ?>
 </a>
@@ -73,17 +153,28 @@ Register
 <li>
 <?php
 
-if(!isset($_SESSION['customer_email'])){
+// if(!isset($_SESSION['customer_email'])){
 
-echo "<a href='checkout.php' >My Account</a>";
+// echo "<a href='checkout.php' >My Account</a>";
 
-}
-else{
+// }
+// else{
 
-echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+// echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
 
-}
+// }
 
+if(!isset($_SESSION['user_name)'])){
+
+    echo "<a href='checkout.php' >My Account</a>";
+    
+    }
+    else{
+    
+    echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+    
+    }
+    
 
 ?>
 </li>
@@ -97,15 +188,25 @@ Go to Cart
 <li>
 <?php
 
-if(!isset($_SESSION['customer_email'])){
+// if(!isset($_SESSION['customer_email'])){
 
-echo "<a href='checkout.php'> Login </a>";
+// echo "<a href='checkout.php'> Login </a>";
 
-}else {
+// }else {
 
-echo "<a href='logout.php'> Logout </a>";
+// echo "<a href='logout.php'> Logout </a>";
 
-}
+// }
+
+if(!isset($_SESSION['user_name'])){
+
+    echo "<a href='checkout.php'> Login </a>";
+    
+    }else {
+    
+    echo "<a href='logout.php'> Logout </a>";
+    
+    }
 
 ?>
 </li>

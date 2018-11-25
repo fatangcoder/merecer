@@ -103,6 +103,8 @@ $p_cat_title = $row_p_cat['p_cat_title'];
 
 <link href="styles/style.css" rel="stylesheet">
 
+<link href="styles/customstyle.css" rel="stylesheet">
+
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
@@ -1175,7 +1177,7 @@ $product_label
 
 <?php
 
-include("includes/footer.php");
+include("includes/footer1.php");
 
 ?>
 

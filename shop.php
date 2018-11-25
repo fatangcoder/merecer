@@ -576,7 +576,7 @@ $('.pagination').html(data);
    
    }
 
-   // getProducts Function Code Ends    
+   getProducts Function Code Ends    
 
 $('.get_manufacturer').click(function(){ 
 

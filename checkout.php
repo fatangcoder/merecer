@@ -2,8 +2,8 @@
 
 session_start();
 
-include("includes/db.php");
 
+include("includes/db.php");
 include("functions/functions.php");
 
 ?>
@@ -40,17 +40,27 @@ include("functions/functions.php");
 
 <?php
 
-if(!isset($_SESSION['customer_email'])){
+// if(!isset($_SESSION['customer_email'])){
 
-echo "Welcome :Guest";
+// echo "Welcome :Guest";
 
 
-}else{
+// }else{
 
-echo "Welcome : " . $_SESSION['customer_email'] . "";
+// echo "Welcome : " . $_SESSION['customer_email'] . "";
 
-}
+// }
 
+if(!isset($_SESSION['user_name'])){
+
+    echo "Welcome :Guest";
+    
+    
+    }else{
+    
+    echo "Welcome : " . $_SESSION['user_name'] . "";
+    
+    }
 
 ?>
 
@@ -74,16 +84,27 @@ Register
 <li>
 <?php
 
-if(!isset($_SESSION['customer_email'])){
+// if(!isset($_SESSION['customer_email'])){
 
-echo "<a href='checkout.php' >My Account</a>";
+// echo "<a href='checkout.php' >My Account</a>";
 
-}
-else{
+// }
+// else{
 
-echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+// echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
 
-}
+// }
+
+if(!isset($_SESSION['user_name'])){
+
+    echo "<a href='checkout.php' >My Account</a>";
+    
+    }
+    else{
+    
+    echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+    
+    }
 
 
 ?>
@@ -98,7 +119,19 @@ Go to Cart
 <li>
 <?php
 
-if(!isset($_SESSION['customer_email'])){
+// if(!isset($_SESSION['customer_email']))
+// {
+
+// echo "<a href='checkout.php'> Login </a>";
+
+// }else {
+
+// echo "<a href='logout.php'> Logout </a>";
+
+// }
+
+if(!isset($_SESSION['user_name']))
+{
 
 echo "<a href='checkout.php'> Login </a>";
 
@@ -277,16 +310,27 @@ echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
 
 <?php
 
-if(!isset($_SESSION['customer_email'])){
+// if(!isset($_SESSION['customer_email'])){
 
-include("customer/customer_login.php");
+// include("customer/customer_login.php");
 
 
-}else{
+// }else{
 
-include("payment_options.php");
+// include("payment_options.php");
 
-}
+// }
+
+if(!isset($_SESSION['user_name'])){
+
+    include("customer/customer_login.php");
+    
+    
+    }else{
+    
+    include("payment_options.php");
+    
+    }
 
 
 

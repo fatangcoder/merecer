@@ -68,7 +68,7 @@ $aCat[(int)$sVal] = (int)$sVal;
 
 <h3 class="panel-title"><!-- panel-title Starts -->
 
-Manufacturers
+Categories
 
 <div class="pull-right"><!-- pull-right Starts -->
 
@@ -94,7 +94,7 @@ Hide
 
 <div class="input-group"><!-- input-group Starts -->
 
-<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-manufacturer" placeholder="Filter Manufacturers">
+<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-manufacturer" placeholder="Filter ">
 
 
 <a class="input-group-addon"> <i class="fa fa-search"></i> </a>

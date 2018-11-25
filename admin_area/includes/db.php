@@ -1,5 +1,5 @@
 <?php
 
-$con = mysqli_connect("localhost","merecmpw_mmdevop","codebunnyloginmmdb","merecmpw_ecom_store");
+$con = mysqli_connect("localhost","root","","merecmpw_ecom_store");
 
 ?>

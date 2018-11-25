@@ -19,6 +19,9 @@ include("functions/functions.php");
 
 <link href="styles/style.css" rel="stylesheet">
 
+<link href="styles/customstyle.css" rel="stylesheet">
+
+
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -438,7 +441,7 @@ echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
 
 <?php
 
-include("includes/footer.php");
+include("includes/footer1.php");
 
 ?>
 
