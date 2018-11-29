@@ -139,7 +139,7 @@ include("pagination/function.php");
                                     $command = "select * from product_categories where cat_id =". $res['cat_id']."";
                                     $productQuery = mysqli_query($con,$command);
                                     while ( $result = mysqli_fetch_array($productQuery)) { ?>
-                                    <li><a href="products.php?product_cat_id=<?php echo $result['p_cat_id']?>"><?php echo  $result['p_cat_title'] ?></a></li>
+                                    <li><a href="products.php?product_cat_id=<?php echo $result['p_cat_id']?>&page=1"><?php echo  $result['p_cat_title'] ?></a></li>
                                     <?php } ?>
                                 </ul>
                                
@@ -148,51 +148,6 @@ include("pagination/function.php");
                         <?php 
                     } ?>
                     </div>
-
-                    <!-- <div class="card card_edit">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#sidemenu" href="#collapseTwo">
-                                WOMEN
-                                <span class="float-right dp_size"> + </span>
-                            </a>
-                        </div>
-                        <div id="collapseTwo" class="collapse">
-                            <div class="card-body">
-                                <ul>
-                                    <li><a href="#">ALL HANDBAGS</a></li>
-                                    <li><a href="#">LONG HANDLE BAGS</a></li>
-                                    <li><a href="#">TOP HANDLE BAGS</a></li>
-                                    <li><a href="#">TOTES</a></li>
-                                    <li><a href="#">SLING BAGS</a></li>
-                                    <li><a href="#">COMPUTER BAGS</a></li>
-                                    <li><a href="#">WALLETS</a></li>
-                                    <li><a href="#">BACKPACK</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card card_edit">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#sidemenu" href="#collapseThree">
-                                BUSINESS ESSENTIALS
-                                <span class="float-right dp_size"> + </span>
-                            </a>
-                        </div>
-                        <div id="collapseThree" class="collapse">
-                            <div class="card-body">
-                                <ul>
-                                    <li><a href="#">NOTEPAD</a></li>
-                                    <li><a href="#">TABLET COVER</a></li>
-                                    <li><a href="#">CARDCASE</a></li>
-                                    <li><a href="#">FOLDER</a></li>
-                                    <li><a href="#">FILOFAX</a></li>
-                                    <li><a href="#">NOTEBOOK</a></li>
-                                    <li><a href="#">BRIEFCASE</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <!--accordion end-->
             </div>
@@ -201,23 +156,18 @@ include("pagination/function.php");
                     <?php
                     if(isset($_GET['product_cat_id'])) {
                         $product_cat_id = @$_GET['product_cat_id'];
-                        $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
-                            $limit = 5; //if you want to dispaly 10 records per page then you have to change here
-                            $startpoint = ($page * $limit) - $limit;
-                            $statement = "products where p_cat_id=".$product_cat_id.""; //you have to pass your query over here
-                            $res=mysqli_query($con, "select * from ".$statement." LIMIT ".$startpoint.",".$limit."");
+
+                        $limit = 8;  
+                        if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { 
+                            $page=1; 
+                        };  
+                        $start_from = ($page-1) * $limit;  
+                        
+                        $sql = "SELECT * FROM products where p_cat_id=".$product_cat_id." LIMIT $start_from , $limit";  
+                        $rs_result = mysqli_query($con, $sql);
                         }
-                            while($row=mysqli_fetch_array($res))
-                            {
-                            // if(isset($_GET['product_cat_id'])) {
-                            //     $product_cat_id = @$_GET['product_cat_id'];
-                            //     $query = mysqli_query($con,  "CALL GetRecordByProductCategoryId($product_cat_id)");
-                            //     $total = mysqli_num_rows($query);
-                            //     $pageSize = 2;
-                            // } else {
-                            //     $query = mysqli_query($con,  "CALL GetAllProducts()");
-                            // }
-                            // while ($row = mysqli_fetch_array($query)){
+
+                        while ($row = mysqli_fetch_array($rs_result)) {  
                         ?>
                     <div class='col-sm-3'>
                         
@@ -245,10 +195,17 @@ include("pagination/function.php");
                             }
                         ?>
                 </div>
-                <?php
-                    echo "<div id='pagingg' >";
-                    echo pagination($statement,$limit,$page);
-                    echo "</div>";
+                <?php  
+                    $sql = "SELECT COUNT(product_id) FROM products where p_cat_id=".$_GET['product_cat_id']."";  
+                    $rs_result = mysqli_query($con, $sql);  
+                    $row = mysqli_fetch_row($rs_result);  
+                    $total_records = $row[0];  
+                    $total_pages = ceil($total_records / $limit);  
+                    $pagLink = "<div class='pagination'>";  
+                    for ($i=1; $i<=$total_pages; $i++) {  
+                                $pagLink .= "<a href='products.php?product_cat_id=".$_GET['product_cat_id']."&page=".$i."'>".$i."</a>";  
+                    };  
+                    echo $pagLink . "</div>";  
                     ?>
             </div> 
         </div>
