@@ -141,8 +141,7 @@ if ($gClient->getAccessToken()) {
             </ul> -->
             <ul class="navbar-nav ml-auto nav_txt_r">
             <li class="nav-item">
-            <a class="nav-link" href="#search"
-              ><span class="pe-7s-search"></span> Search
+            <a class="nav-link" href="#search"><span class="pe-7s-search"></span> Search
             </a>
           </li>
                 <!--  <li class="nav-item">
