@@ -25,6 +25,8 @@ $row_edit = mysqli_fetch_array($run_edit);
 
 $p_cat_id = $row_edit['p_cat_id'];
 
+$cat_id = $row_edit['cat_id'];
+
 $p_cat_title = $row_edit['p_cat_title'];
 
 $p_cat_top = $row_edit['p_cat_top'];
@@ -89,6 +91,40 @@ $new_p_cat_image = $row_edit['p_cat_image'];
 </div>
 
 </div><!-- form-group Ends -->
+<div class="form-group" ><!-- form-group Starts -->
+
+<label class="col-md-3 control-label" >Product Category Type</label>
+
+<div class="col-md-6" >
+<?php 
+    
+?>
+
+<select class="form-control" name="cat_id"><!-- select manufacturer Starts -->
+
+<option> Select A product type </option>
+
+<?php
+
+$get_categories = "select * from categories";
+$run_categories = mysqli_query($con,$get_categories);
+while($row_categories = mysqli_fetch_array($run_categories)){
+$category_id = $row_categories['cat_id'];
+$cat_title = $row_categories['cat_title'];
+if ($category_id == $cat_id)
+{
+    echo "<option value='$category_id' selected='selected'> $cat_title.</option>";
+} else {
+    echo "<option value='$category_id'> $cat_title.</option>";
+}
+}
+
+?>
+
+</select>
+</div>
+
+</div>
 
 <div class="form-group" ><!-- form-group Starts -->
 
@@ -109,6 +145,7 @@ $new_p_cat_image = $row_edit['p_cat_image'];
 </div>
 
 </div><!-- form-group Ends -->
+
 
 <div class="form-group" ><!-- form-group Starts -->
 
@@ -153,6 +190,8 @@ $new_p_cat_image = $row_edit['p_cat_image'];
 
 if(isset($_POST['update'])){
 
+$cat_id = $_POST['cat_id'];
+
 $p_cat_title = $_POST['p_cat_title'];
 
 $p_cat_top = $_POST['p_cat_top'];
@@ -170,7 +209,7 @@ $p_cat_image = $new_p_cat_image;
 
 }
 
-$update_p_cat = "update product_categories set p_cat_title='$p_cat_title',p_cat_top='$p_cat_top',p_cat_image='$p_cat_image' where p_cat_id='$p_cat_id'";
+$update_p_cat = "update product_categories set p_cat_title='$p_cat_title', cat_id='$cat_id' ,p_cat_top='$p_cat_top',p_cat_image='$p_cat_image' where p_cat_id='$p_cat_id'";
 
 $run_p_cat = mysqli_query($con,$update_p_cat);
 

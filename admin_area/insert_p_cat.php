@@ -65,6 +65,38 @@ else {
 
 <div class="form-group" ><!-- form-group Starts -->
 
+<label class="col-md-3 control-label" >Product Category Title</label>
+
+<div class="col-md-6" >
+
+<select class="form-control" name="cat_id"><!-- select manufacturer Starts -->
+
+<option> Select A product type </option>
+
+<?php
+
+$get_categories = "select * from categories";
+$run_categories = mysqli_query($con,$get_categories);
+while($row_categories = mysqli_fetch_array($run_categories)){
+$cat_id = $row_categories['cat_id'];
+$cat_title = $row_categories['cat_title'];
+
+echo "<option value='$cat_id'>
+$cat_title
+</option>";
+
+}
+
+?>
+
+</select>
+
+</div>
+
+</div><!-- form-group Ends -->
+
+<div class="form-group" ><!-- form-group Starts -->
+
 <label class="col-md-3 control-label" >Show as Top Product Category</label>
 
 <div class="col-md-6" >
@@ -122,6 +154,8 @@ if(isset($_POST['submit'])){
 
 $p_cat_title = $_POST['p_cat_title'];
 
+$cat_id = $_POST['cat_id'];
+
 $p_cat_top = $_POST['p_cat_top'];
 
 $p_cat_image = $_FILES['p_cat_image']['name'];
@@ -130,7 +164,7 @@ $temp_name = $_FILES['p_cat_image']['tmp_name'];
 
 move_uploaded_file($temp_name,"other_images/$p_cat_image");
 
-$insert_p_cat = "insert into product_categories (p_cat_title,p_cat_top,p_cat_image) values ('$p_cat_title','$p_cat_top','$p_cat_image')";
+$insert_p_cat = "insert into product_categories (p_cat_title,cat_id,p_cat_top,p_cat_image) values ('$p_cat_title','$cat_id','$p_cat_top','$p_cat_image')";
 
 $run_p_cat = mysqli_query($con,$insert_p_cat);
 
@@ -138,7 +172,7 @@ if($run_p_cat){
 
 echo "<script>alert('New Product Category Has been Inserted')</script>";
 
-echo "<script>window.open('index.php?view_p_cats','_self')</script>";
+// echo "<script>window.open('index.php?view_p_cats','_self')</script>";
 
 }
 

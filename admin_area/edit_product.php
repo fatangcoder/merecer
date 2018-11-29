@@ -38,11 +38,15 @@ $p_image2 = $row_edit['product_img2'];
 
 $p_image3 = $row_edit['product_img3'];
 
+$p_image4 = $row_edit['product_img4'];
+
 $new_p_image1 = $row_edit['product_img1'];
 
 $new_p_image2 = $row_edit['product_img2'];
 
 $new_p_image3 = $row_edit['product_img3'];
+
+$new_p_image4 = $row_edit['product_img4'];
 
 $p_price = $row_edit['product_price'];
 
@@ -327,6 +331,18 @@ echo "<option value='$cat_id'>$cat_title</option>";
 
 <input type="file" name="product_img3" class="form-control" >
 <br><img src="product_images/<?php echo $p_image3; ?>" width="70" height="70" >
+
+</div>
+
+</div><!-- form-group Ends -->
+<div class="form-group" ><!-- form-group Starts -->
+
+<label class="col-md-3 control-label" > Product Image 4 </label>
+
+<div class="col-md-6" >
+
+<input type="file" name="product_img4" class="form-control" >
+<br><img src="product_images/<?php echo $p_image4; ?>" width="70" height="70" >
 
 </div>
 

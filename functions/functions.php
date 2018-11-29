@@ -271,7 +271,7 @@ $aWhere[] = 'cat_id='.(int)$sVal;
 
 /// Categories Code Ends ///
 
-$per_page=6;
+$per_page=8;
 
 if(isset($_GET['page'])){
 
@@ -502,7 +502,7 @@ $total_records = mysqli_num_rows($result);
 
 $total_pages = ceil($total_records / $per_page);
 
-echo "<li><a href='shop.php?page=1";
+echo "<li><a href='products.php?page=1";
 
 if(!empty($aPath)){ echo "&".$aPath; }
 
@@ -510,11 +510,11 @@ echo "' >".'First Page'."</a></li>";
 
 for ($i=1; $i<=$total_pages; $i++){
 
-echo "<li><a href='shop.php?page=".$i.(!empty($aPath)?'&'.$aPath:'')."' >".$i."</a></li>";
+echo "<li><a href='products.php?page=".$i.(!empty($aPath)?'&'.$aPath:'')."' >".$i."</a></li>";
 
 };
 
-echo "<li><a href='shop.php?page=$total_pages";
+echo "<li><a href='products.php?page=$total_pages";
 
 if(!empty($aPath)){ echo "&".$aPath; }
 

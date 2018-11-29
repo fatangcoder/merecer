@@ -80,380 +80,177 @@ if ($gClient->getAccessToken()) {
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
-<title>Merecer Melhor | coming soon in 2019 </title>
-<meta name="google-site-verification" content="cfEtbhLPxNxhejLF5MDgsRMIq-hapjeFth9hFCvLsN4" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet" >
-
-<link href="styles/bootstrap.min.css" rel="stylesheet">
-
-<link href="styles/style.css" rel="stylesheet">
-
-<link href="styles/customstyle.css" rel="stylesheet">
-
-
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <title>Merecer Melhor</title>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="cfEtbhLPxNxhejLF5MDgsRMIq-hapjeFth9hFCvLsN4" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/Pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
 
 
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+        <!-- Brand -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto">
+                    <?php 
+                        $q = "select * from categories where showInMenu = 1";
+                        $query = mysqli_query($con,$q);
+                        while ( $res = mysqli_fetch_array($query)) {
+                        ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">
+                    
+                        <?php echo $res['cat_title'] ?>
+                    </a>
+                    <div class="dropdown-menu">
+                    <?php 
+                        $command = "select * from product_categories where cat_id =". $res['cat_id']."";
+                        $productQuery = mysqli_query($con,$command);
+                        while ( $result = mysqli_fetch_array($productQuery)) {
+                        ?>
+                        
+                        <a class="dropdown-item" href="products.php?product_cat_id=<?php echo $result['p_cat_id']?>"><?php echo  $result['p_cat_title'] ?></a>
+                        <?php  
+                            }
+                        ?>
+                    </div>
+                    <?php  
+                }
+                    ?>
+                </li>
+            </ul>
+            <!-- <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a  href="#"> 
+                        <img src="images/logo.jpg" alt="merecerlogo"  height="auto" width="130px">
+                    </a>
+                </li>
+            </ul> -->
+            <ul class="navbar-nav ml-auto nav_txt_r">
+                    <!-- <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="pe-7s-search"></span> Search </a>
+                        </li> -->
+                <!--  <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li> -->
+
+                <li class="nav-item">
+                    <?php
+                        if(!isset($_SESSION['customer_email'])){
+                            echo "<a  class='nav-link' href='checkout.php'> Login </a>";
+                        }   else {
+                            echo "<a  class='btn btn-success btn-sm nav-link' style='color: white;' href='logout.php'> Welcome, " . $_SESSION['user_name'] ."</a>";
+                        }
+
+                    ?>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" >My Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Basket</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <!-- navbar end -->
+    <!-- carousel-->
+    <div style="padding-top: 3%;" id="demo" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+                    
+            <?php
+
+                $get_slides = "select * from slider LIMIT 0,1";
+
+                $run_slides = mysqli_query($con,$get_slides);
+
+                while($row_slides=mysqli_fetch_array($run_slides)){
+
+                $slide_name = $row_slides['slide_name'];
+                $slide_image = $row_slides['slide_image'];
+
+                $slide_url = $row_slides['slide_url'];
+
+                echo "
+
+                <div class='carousel-item active'>
+
+                <a href='$slide_url'><img src='admin_area/slides_images/$slide_image' class='img_responsive'></a>
 
-<div id="top"><!-- top Starts -->
+                </div>
 
-<div class="container"><!-- container Starts -->
+                ";
+                }
+            ?>
 
-<div class="col-md-6 offer"><!-- col-md-6 offer Starts -->
+            <?php
 
-<a href="#" class="btn btn-success btn-sm" >
-<?php
+                $get_slides = "select * from slider LIMIT 1,2 ";
 
-// if(!isset($_SESSION['customer_email'])){
-// echo "Welcome :Guest";
+                $run_slides = mysqli_query($con,$get_slides);
 
+                while($row_slides = mysqli_fetch_array($run_slides)) {
 
-// }else{
 
-// echo "Welcome : " . $_SESSION['customer_email'] . "";
+                $slide_name = $row_slides['slide_name'];
 
-// }
+                $slide_image = $row_slides['slide_image'];
 
-if(!isset($_SESSION['user_name'])){
-    echo "Welcome :Guest";
-    
-    
-    }else{
-    
-    echo "Welcome : " . $_SESSION['user_name'] . "";
-    
-    }
+                $slide_url = $row_slides['slide_url'];
 
-?>
-</a>
+                echo "
+                <div class='carousel-item'>
 
-<a href="#">
-Shopping Cart Total Price: <?php total_price(); ?>, Total Items <?php items(); ?>
-</a>
+                <a href='$slide_url'><img src='admin_area/slides_images/$slide_image' class='img_responsive'></a>
 
-</div><!-- col-md-6 offer Ends -->
+                </div>
 
-<div class="col-md-6"><!-- col-md-6 Starts -->
-<ul class="menu"><!-- menu Starts -->
+                ";
 
-<li>
-<a href="customer_register.php">
-Register
-</a>
-</li>
 
-<li>
-<?php
+                }
+            ?>
+            <!-- <div class="carousel-item active">
+                <img src="img/bg/home_bg_1.png" class="img_responsive" alt="image 1">
+            </div>
+            <div class="carousel-item">
+                <img src="img/bg/home_bg_2.png" class="img_responsive" alt="image 2">
+            </div> -->
+        </div>
 
-// if(!isset($_SESSION['customer_email'])){
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
 
-// echo "<a href='checkout.php' >My Account</a>";
-
-// }
-// else{
-
-// echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
-
-// }
-
-if(!isset($_SESSION['user_name)'])){
-
-    echo "<a href='checkout.php' >My Account</a>";
-    
-    }
-    else{
-    
-    echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
-    
-    }
-    
-
-?>
-</li>
-
-<li>
-<a href="cart.php">
-Go to Cart
-</a>
-</li>
-
-<li>
-<?php
-
-// if(!isset($_SESSION['customer_email'])){
-
-// echo "<a href='checkout.php'> Login </a>";
-
-// }else {
-
-// echo "<a href='logout.php'> Logout </a>";
-
-// }
-
-if(!isset($_SESSION['user_name'])){
-
-    echo "<a href='checkout.php'> Login </a>";
-    
-    }else {
-    
-    echo "<a href='logout.php'> Logout </a>";
-    
-    }
-
-?>
-</li>
-
-</ul><!-- menu Ends -->
-
-</div><!-- col-md-6 Ends -->
-
-</div><!-- container Ends -->
-</div><!-- top Ends -->
-
-<div class="navbar navbar-default" id="navbar"><!-- navbar navbar-default Starts -->
-<div class="container" ><!-- container Starts -->
-
-<div class="navbar-header"><!-- navbar-header Starts -->
-
-<a class="navbar-brand home" href="index.php" ><!--- navbar navbar-brand home Starts -->
-
-<img src="images/logo.jpg" alt="merecerlogo" class="hidden-xs"  height="auto" width="130px">
-<!-- <img src="images/logo-small.png" alt="merecer logo" class="visible-xs" > -->
-
-</a><!--- navbar navbar-brand home Ends -->
-
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation"  >
-
-<span class="sr-only" >Toggle Navigation </span>
-
-<i class="fa fa-align-justify"></i>
-
-</button>
-
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search" >
-
-<span class="sr-only" >Toggle Search</span>
-
-<i class="fa fa-search" ></i>
-
-</button>
-
-
-</div><!-- navbar-header Ends -->
-
-<div class="navbar-collapse collapse" id="navigation" ><!-- navbar-collapse collapse Starts -->
-
-<div class="padding-nav" ><!-- padding-nav Starts -->
-
-<ul class="nav navbar-nav navbar-left"><!-- nav navbar-nav navbar-left Starts -->
-
-<li class="active">
-<a href="index.php"> Home </a>
-</li>
-
-<li>
-<a href="shop.php"> Shop </a>
-</li>
-
-<li>
-<?php
-
-if(!isset($_SESSION['customer_email'])){
-
-echo "<a href='checkout.php' >My Account</a>";
-
-}
-else{
-
-echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
-
-}
-
-
-?>
-</li>
-
-<li>
-<a href="cart.php"> Shopping Cart </a>
-</li>
-
-<li>
-<a href="about.php"> About Us </a>
-</li>
-
-<li>
-
-<a href="services.php"> Services </a>
-
-</li>
-
-<li>
-<a href="contact.php"> Contact Us </a>
-</li>
-
-</ul><!-- nav navbar-nav navbar-left Ends -->
-
-</div><!-- padding-nav Ends -->
-
-<a class="btn btn-primary navbar-btn right" href="cart.php"><!-- btn btn-primary navbar-btn right Starts -->
-
-<i class="fa fa-shopping-cart"></i>
-
-<span> <?php items(); ?> items in cart </span>
-
-</a><!-- btn btn-primary navbar-btn right Ends -->
-
-<div class="navbar-collapse collapse right"><!-- navbar-collapse collapse right Starts -->
-
-<button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
-
-<span class="sr-only">Toggle Search</span>
-
-<i class="fa fa-search"></i>
-
-</button>
-
-</div><!-- navbar-collapse collapse right Ends -->
-
-<div class="collapse clearfix" id="search"><!-- collapse clearfix Starts -->
-
-<form class="navbar-form" method="get" action="results.php"><!-- navbar-form Starts -->
-
-<div class="input-group"><!-- input-group Starts -->
-
-<input class="form-control" type="text" placeholder="Search" name="user_query" required>
-
-<span class="input-group-btn"><!-- input-group-btn Starts -->
-
-<button type="submit" value="Search" name="search" class="btn btn-primary">
-
-<i class="fa fa-search"></i>
-
-</button>
-
-</span><!-- input-group-btn Ends -->
-
-</div><!-- input-group Ends -->
-
-</form><!-- navbar-form Ends -->
-
-</div><!-- collapse clearfix Ends -->
-
-</div><!-- navbar-collapse collapse Ends -->
-
-</div><!-- container Ends -->
-</div><!-- navbar navbar-default Ends -->
-
-<div class="container-fluid" id="slider"><!-- container Starts -->
-
-<div class="col-md-12 col_adjust"><!-- col-md-12 Starts -->
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel"><!-- carousel slide Starts --->
-
-<ol class="carousel-indicators"><!-- carousel-indicators Starts -->
-
-<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-
-<li data-target="#myCarousel" data-slide-to="1"></li>
-
-<li data-target="#myCarousel" data-slide-to="2"></li>
-
-<li data-target="#myCarousel" data-slide-to="3"></li>
-
-
-</ol><!-- carousel-indicators Ends -->
-
-<div class="carousel-inner"><!-- carousel-inner Starts -->
-
-<?php
-
-$get_slides = "select * from slider LIMIT 0,1";
-
-$run_slides = mysqli_query($con,$get_slides);
-
-while($row_slides=mysqli_fetch_array($run_slides)){
-
-$slide_name = $row_slides['slide_name'];
-$slide_image = $row_slides['slide_image'];
-
-$slide_url = $row_slides['slide_url'];
-
-echo "
-
-<div class='item active'>
-
-<a href='$slide_url'><img src='admin_area/slides_images/$slide_image'></a>
-
-</div>
-
-";
-}
-
-?>
-
-<?php
-
-$get_slides = "select * from slider LIMIT 1,3 ";
-
-$run_slides = mysqli_query($con,$get_slides);
-
-while($row_slides = mysqli_fetch_array($run_slides)) {
-
-
-$slide_name = $row_slides['slide_name'];
-
-$slide_image = $row_slides['slide_image'];
-
-$slide_url = $row_slides['slide_url'];
-
-echo "
-
-<div class='item'>
-
-<a href='$slide_url'><img src='admin_area/slides_images/$slide_image'></a>
-
-</div>
-
-";
-
-
-}
-
-
-
-?>
-
-</div><!-- carousel-inner Ends -->
-
-<a class="left carousel-control" href="#myCarousel" data-slide="prev"><!-- left carousel-control Starts -->
-
-<span class="glyphicon glyphicon-chevron-left"> </span>
-
-<span class="sr-only"> Previous </span>
-
-</a><!-- left carousel-control Ends -->
-
-<a class="right carousel-control" href="#myCarousel" data-slide="next"><!-- right carousel-control Starts -->
-
-<span class="glyphicon glyphicon-chevron-right"> </span>
-
-<span class="sr-only"> Next </span>
-
-</a><!-- right carousel-control Ends -->
-
-</div><!-- carousel slide Ends --->
-
-</div><!-- col-md-12 Ends -->
-
-</div><!-- container Ends -->
+    </div>
+    <!-- Carousel End-->
   <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-pad_adjst">
@@ -795,9 +592,18 @@ include("includes/footer1.php");
 
 ?>
 
-<script src="js/jquery.min.js"> </script>
+<!-- <script src="js/jquery.min.js"> </script>
+<script src="js/bootstrap.min.js"></script> -->
 
-<script src="js/bootstrap.min.js"></script>
 
+
+<!-- New layout Starts -->
+    <script src="js/js/jquery-3.3.1.min.js"></script>
+    <script src="js/js/popper.js"></script>
+    <script src="js/js/bootstrap.min.js"></script>
+    <script src="js/js/owl.carousel.min.js"></script>
+    <script src="js/js/scrollreveal.min.js"></script>
+    <script src="js/js/main.js"></script>
+<!-- New Layout Ends -->
 </body>
 </html>

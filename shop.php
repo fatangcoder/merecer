@@ -425,7 +425,7 @@ $(document).ready(function(){
   
   // Manufacturers Code Starts 
 
-    var sPath = ''; 
+var sPath = ''; 
 
 var aInputs = $('li').find('.get_manufacturer');
 
@@ -576,7 +576,7 @@ $('.pagination').html(data);
    
    }
 
-   getProducts Function Code Ends    
+   // getProducts Function Code Ends    
 
 $('.get_manufacturer').click(function(){ 
 
