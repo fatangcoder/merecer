@@ -140,9 +140,11 @@ if ($gClient->getAccessToken()) {
                 </li>
             </ul> -->
             <ul class="navbar-nav ml-auto nav_txt_r">
-                    <!-- <li class="nav-item">
-                            <a class="nav-link" href="#"><span class="pe-7s-search"></span> Search </a>
-                        </li> -->
+            <li class="nav-item">
+            <a class="nav-link" href="#search"
+              ><span class="pe-7s-search"></span> Search
+            </a>
+          </li>
                 <!--  <li class="nav-item">
                     <a class="nav-link" href="#">Login</a>
                 </li> -->
@@ -168,6 +170,12 @@ if ($gClient->getAccessToken()) {
         </div>
     </nav>
     <!-- navbar end -->
+    <div id="search">
+      <span class="close">X</span>
+      <form role="search" id="searchform"  method="get" method="get" action="results.php">
+        <input value="" name="q" type="search" placeholder="type to search" />
+      </form>
+    </div>
     <!-- carousel-->
     <div style="padding-top: 3%;" id="demo" class="carousel slide" data-ride="carousel">
 
